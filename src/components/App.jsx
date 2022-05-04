@@ -3,7 +3,25 @@ import "../css/App.css";
 import data from "../sample_data.json"; // ../ -> means 1 directory up from where we are
 
 function Question(props) {
-  return <div>{props.question}</div>;
+  let choices = data[0].question.choices;
+
+  return (
+    <div>
+      {props.question}
+      {/* <Answer answer={data[0].question.choices[0]}/> */}
+      {choices.map((element) => (
+        <Answer answer={element} />
+      ))}
+    </div>
+  );
+}
+
+function NextQuestion(props) {
+  return <button type="button">Next Question</button>;
+}
+
+function Answer(props) {
+  return <div>{props.answer}</div>;
 }
 
 function App() {
@@ -11,8 +29,9 @@ function App() {
 
   return (
     <div className="app">
-      Trivia!
-      <Question question="Question goes here" />
+      <h1>Trivia!</h1>
+      <Question question={data[0].question.text} />
+      <NextQuestion />
     </div>
   );
 }
